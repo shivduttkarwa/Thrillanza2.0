@@ -908,3 +908,204 @@ h3 {
     font-size: 1rem;
   }
 }
+
+
+
+/* Hero wave */
+.hero-overlay-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none; /* Allows clicks to pass through to buttons beneath */
+}
+
+/* Horizon wave styling */
+.horizon-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 170px;
+  filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.5));
+}
+
+.wave-path {
+  animation: wave-animation 15s ease-in-out infinite alternate;
+}
+
+@keyframes wave-animation {
+  0% { d: path('M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,144C960,149,1056,203,1152,229.3C1248,256,1344,256,1392,256L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'); }
+  50% { d: path('M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,170.7C960,160,1056,192,1152,213.3C1248,235,1344,245,1392,250.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'); }
+  100% { d: path('M0,224L48,224C96,224,192,224,288,213.3C384,203,480,181,576,186.7C672,192,768,224,864,234.7C960,245,1056,235,1152,208C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'); }
+}
+
+/* Destination silhouettes */
+.destination-silhouettes {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 52;
+}
+
+.silhouette-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.silhouette-path {
+  fill: rgba(17, 24, 39, 0.7);
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+}
+
+/* Journey path element */
+.journey-path {
+  position: absolute;
+  bottom: 80px;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  z-index: 53;
+  display: flex;
+  align-items: center;
+}
+
+.journey-line {
+  flex-grow: 1;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.7), rgba(168, 85, 247, 0.7));
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  animation: journey-light 4s linear infinite;
+}
+
+@keyframes journey-light {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.journey-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #06b6d4;
+  filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.8));
+  transition: all 0.5s ease;
+}
+
+.journey-start {
+  animation: pulse-cyan 2s infinite;
+}
+
+.journey-middle {
+  background: #a855f7;
+  filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
+  animation: pulse-purple 2s infinite 0.6s;
+}
+
+.journey-end {
+  background: #6366f1;
+  filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.8));
+  animation: pulse-indigo 2s infinite 1.2s;
+}
+
+@keyframes pulse-cyan {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); box-shadow: 0 0 15px rgba(6, 182, 212, 0.8); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-purple {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); box-shadow: 0 0 15px rgba(168, 85, 247, 0.8); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-indigo {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); box-shadow: 0 0 15px rgba(99, 102, 241, 0.8); }
+  100% { transform: scale(1); }
+}
+
+/* Compass accent */
+.compass-accent {
+  position: absolute;
+  bottom: 60px;
+  right: 10%;
+  width: 60px;
+  height: 60px;
+  z-index: 54;
+  opacity: 0.9;
+}
+
+.compass-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+}
+
+.compass-circle {
+  fill: none;
+  stroke: rgba(99, 102, 241, 0.7);
+  stroke-width: 1;
+}
+
+.compass-lines {
+  stroke: rgba(168, 85, 247, 0.7);
+  stroke-width: 1;
+}
+
+.compass-needle {
+  fill: rgba(6, 182, 212, 0.7);
+  animation: compass-rotate 15s linear infinite;
+  transform-origin: center;
+}
+
+.compass-center {
+  fill: #a855f7;
+}
+
+@keyframes compass-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .hero-overlay-container {
+    height: 120px;
+  }
+  
+  .horizon-wave {
+    height: 110px;
+  }
+  
+  .destination-silhouettes {
+    height: 50px;
+  }
+  
+  .journey-path {
+    bottom: 50px;
+  }
+  
+  .compass-accent {
+    bottom: 40px;
+    width: 40px;
+    height: 40px;
+  }
+}
