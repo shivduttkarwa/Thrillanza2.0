@@ -297,3 +297,152 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 
+
+
+//Theme switch js
+
+// Theme Switcher Functionality - Improved
+function setupThemeSwitcher() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+  
+  // Check for saved theme preference or use system preference
+  const savedTheme = localStorage.getItem('thrillanza-theme');
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  // Set initial theme
+  if (savedTheme === 'light') {
+    body.classList.add('light-theme');
+    updateMobileIcon(true);
+  } else if (savedTheme === 'dark') {
+    body.classList.remove('light-theme');
+    updateMobileIcon(false);
+  } else if (!prefersDarkScheme.matches) {
+    body.classList.add('light-theme');
+    updateMobileIcon(true);
+  }
+  
+  // Toggle functionality for desktop button
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+  }
+  
+  // Toggle functionality for mobile button
+  if (mobileThemeToggle) {
+    mobileThemeToggle.addEventListener('click', toggleTheme);
+  }
+  
+  function toggleTheme() {
+    body.classList.toggle('light-theme');
+    const isLight = body.classList.contains('light-theme');
+    
+    // Save preference to localStorage
+    localStorage.setItem('thrillanza-theme', isLight ? 'light' : 'dark');
+    
+    // Update mobile icon
+    updateMobileIcon(isLight);
+  }
+  
+  // Function to update the mobile theme icon
+  function updateMobileIcon(isLight) {
+    if (mobileThemeIcon) {
+      if (isLight) {
+        mobileThemeIcon.innerHTML = `
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        `;
+        mobileThemeToggle.innerHTML = `
+          <svg id="mobile-theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span>Switch to Dark</span>
+        `;
+      } else {
+        mobileThemeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+        mobileThemeToggle.innerHTML = `
+          <svg id="mobile-theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span>Switch to Light</span>
+        `;
+      }
+    }
+  }
+}
+
+// Add this to your document.addEventListener('DOMContentLoaded', function() {...}); block
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Script initialized");
+  
+  // Existing initialization code...
+  
+  // Setup theme switcher
+  setupThemeSwitcher();
+  
+  // Rest of your existing initialization code...
+});
+
+
+
+//theme switcher mobile js
+
+function setupThemeSwitcher() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle'); // Keep for backward compatibility
+  const body = document.body;
+  
+  // Check for saved theme preference or use system preference
+  const savedTheme = localStorage.getItem('thrillanza-theme');
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  // Set initial theme
+  if (savedTheme === 'light') {
+    body.classList.add('light-theme');
+  } else if (savedTheme === 'dark') {
+    body.classList.remove('light-theme');
+  } else if (!prefersDarkScheme.matches) {
+    body.classList.add('light-theme');
+  }
+  
+  // Toggle functionality for desktop button
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+  }
+  
+  // Toggle functionality for mobile header button
+  if (themeToggleMobile) {
+    themeToggleMobile.addEventListener('click', toggleTheme);
+  }
+  
+  // Toggle functionality for mobile menu button (if still present)
+  if (mobileThemeToggle) {
+    mobileThemeToggle.addEventListener('click', toggleTheme);
+  }
+  
+  function toggleTheme() {
+    body.classList.toggle('light-theme');
+    const isLight = body.classList.contains('light-theme');
+    
+    // Save preference to localStorage
+    localStorage.setItem('thrillanza-theme', isLight ? 'light' : 'dark');
+  }
+}
+
